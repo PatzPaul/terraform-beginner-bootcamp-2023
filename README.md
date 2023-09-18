@@ -48,7 +48,7 @@ UBUNTU_CODENAME=jammy
 
 While fixing the Terraform CLI gpg depreciation issues we notice that bash scripts were a considerable amount more code. So we decided to create a bash script to install the Terraform CLI. 
 This bash script is located here: ([./bin/install_terraform///-cli](./bin/install_terraform_cli))
-- This will keep the Gitpof Task File([.gitpod.yml](.gitpod.yml)) tidy. 
+- This will keep the Gitpod Task File([.gitpod.yml](.gitpod.yml)) tidy. 
 - This allows us to easily debug and execute manually Terraform CLI install 
 - This will allow better portability for other projects that need to install Terraform CLI.
 
@@ -81,19 +81,19 @@ chmod 744 ./bin/install_terraform_cli
 ```
 https://en.wikipedia.org/wiki/Chmod
 
-### Github Lifecylce(BEfore, Init, Command)
+### Github Lifecylce(Before, Init, Command)
 we need to be careful when using the Init because it will not rerun if we restart an existing workspace.
 
 https://www.gitpod.io/docs/configure/workspaces/tasks
 
 
-### Working Env VArs 
+### Working Env Vars 
 
 We can list out all Environment Variables (Env Vars) Using the `env` command 
 
 we can filter specific env vars using grep eg. `env | grep AWS_`
 
-### Setting and Unsetting ENV Vars 
+### Setting and Unsetting Env Vars 
 
 In the terminal we can set using `export HELLO='world'`
 
@@ -158,3 +158,57 @@ If succesful you should receive a json payload return that looks like this
 ```
 
 we'll need to generate AWS CLI credentials from IAM user in order to use AWS CLI.
+
+## Terraform Basics 
+
+### Terraform Registry
+
+Terraform sources their providers and modules from the terraform registry which is located at [registry.terraform.io](https://registry.terraform.io/)
+
+- **Providers** is an interface to APIs that will enable us to create resources in terraform such as a storage bucket.
+
+- **Modules** are a way to make large amount of terraform code modular, portable and sharable
+
+[Random Terraform Provider](https://registry.terraform.io/providers/hashicorp/random)
+
+### Terraform Console
+
+We can see a list of all the Terraform commands by simply typing `terraform`
+
+### Terraform Init
+
+At the start of a new terraform project we will run `terraform init` to download the binaries for the terraform providers that we'll use in this project 
+
+### Terraform Plan
+
+This will generate out a changeset, about the state of our infastructure and what will be changed.
+We can output this changeset ie. "plan" to be passed to an apply, but often you can just ignore outputting.
+
+### Terraform Apply 
+
+`terraform apply`
+
+This will run a plan and pass the changeset to be execute by terraform.Apply should prompt yes or no.
+
+If we want to automatically approve and apply we can provide the auto approve flag eg. `terraform apply --auto-approve`
+
+### Terraform Lock Files 
+`.terraform.lock.hcl` contains the locked versioning for the providers or modules that should be used with this project.
+
+The Terraform Lock File should be committed to your Version Control System (VSC) eg. Github
+
+### Terraform State Files
+
+`.terraform.tfstate` contain information about the current state of your infrastructure.
+
+This file **should not be commited** to your VCS.
+
+This file can contain sensitive data 
+
+If you lose this file, you lose knowing the state of your infrastructure.
+
+`.terraform.tfstate.backup` is the previous state file state 
+
+### Terraform Directory
+
+`.terraform` directory contains binaries of terraform providers.
