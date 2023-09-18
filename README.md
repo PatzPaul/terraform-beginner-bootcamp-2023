@@ -222,3 +222,31 @@ If you lose this file, you lose knowing the state of your infrastructure.
 ### Terraform Directory
 
 `.terraform` directory contains binaries of terraform providers.
+
+### Terraform Cloud login Issues and Gitpod workspaces 
+
+When Attempting to run `terraform login` it will launch bash a wiswig view to generate a token however it is not functioning properly with Gitpod VsCode in the browser.
+
+The workaround is manually generate a token in Terraform Cloud 
+
+```
+https://app.terraform.io/app/settings/tokens?source=terraform-login
+```
+
+Then create and open the file manually here:
+
+```sh
+touch /home/gitpod/.terraform.d/credentials.tfrc.json
+open /home/gitpod/.terraform.d/credentials.tfrc.json
+```
+Provide the following code (replace your token in the file):
+
+```json
+{
+    "credentials":{
+        "app.terraform.io":{
+            "token":"YOUR-TERRAFORM-CLOUD-TOKEN"
+        }
+    }
+}
+```
