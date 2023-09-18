@@ -192,6 +192,16 @@ This will run a plan and pass the changeset to be execute by terraform.Apply sho
 
 If we want to automatically approve and apply we can provide the auto approve flag eg. `terraform apply --auto-approve`
 
+### Terraform Destroy 
+`terraform destroy`
+This will destroy all resources such as recently generated storage buckets 
+
+### S3 Bucket Creation 
+
+`S3 bucket`
+When we tried generating a random bucket name we ran into an issue that needed resolving and the implementation was put on using lowercase`true` and making sure to reference no uppercase `false` just in case
+
+
 ### Terraform Lock Files 
 `.terraform.lock.hcl` contains the locked versioning for the providers or modules that should be used with this project.
 
