@@ -87,13 +87,13 @@ we need to be careful when using the Init because it will not rerun if we restar
 https://www.gitpod.io/docs/configure/workspaces/tasks
 
 
-### Working Env VArs 
+### Working Env Vars 
 
 We can list out all Environment Variables (Env Vars) Using the `env` command 
 
 we can filter specific env vars using grep eg. `env | grep AWS_`
 
-### Setting and Unsetting ENV Vars 
+### Setting and Unsetting Env Vars 
 
 In the terminal we can set using `export HELLO='world'`
 
