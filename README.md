@@ -252,3 +252,37 @@ Provide the following code (replace your token in the file):
 ```
 
 We have automated this workaround with the following bash script [bin/generate_tfrc_credentials](bin/generate_tfrc_credentials)
+
+### Terraform Set up for Terraform Alias
+
+When running the `terraform` command we want to use an alias `tf` by setting it in the .bash_profile
+
+Create a bash file `set_tf_alias` in the `./bin` directory to handle this when running workspace
+```bash
+#!/usr/bin/env bash
+
+# Check if the alias already exists in the .bash_profile
+grep -q 'alias tf="terraform"' ~/ .bash_profile
+
+# $? is a special variable in bash that holds the exit status of the last 
+
+if [ $? -ne 0]; then
+    # if the alias does not exist append it 
+    echo 'alias tf="terraform"' >> ~/ .bash_profile
+    echo "Alias added successfully"
+else
+    # Inform the user if the alias already exists 
+    echo "Alias already exists in .bash_profile."
+fi
+
+source ~/ .bash_profile
+```
+Proceed to make the file executable 
+```bash
+chmod u+x ./bin/set_tf_alias
+```
+then proceed to add the following in `gitpod.yml` file
+
+```yml
+source ./bin/set_tf_alias
+```
