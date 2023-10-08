@@ -1,6 +1,4 @@
 # Terraform Beginner Bootcamp 2023 - Week 1️⃣:
-<<<<<<< HEAD
-=======
 
 ## Root Module Structure 
 
@@ -50,4 +48,25 @@ This is the default file to load in terraform variables in bulk
 
 ### auto.tfvars
 This file is another way to automatically load variable values. <strong>Terraform</strong> automatically loads variables from a file named auto.tfvars if it exists in the current directory. It's useful for providing default values for variables.
->>>>>>> 20-create-table-of-contents-for-markdown
+ 
+### order of terraform variables 
+
+- TODO: document which terraform variables takes presendence
+
+## Dealing with Configuration Drift 
+
+## What happens if we lose our state file?
+
+If you lose your statefile, you most likely have to tear down all your cloud infastructure manually.
+
+You can use terraform port but won't for all cloud resources. You need check the terraform providers documentation for which resourcs support import.
+
+### Fix Missing Resources with Terraform Import
+[Terraform Import](https://developer.hashicorp.com/terraform/cli/import)
+
+### Fix Manual Configuration
+
+If Someone goes and deletes or modifies cloud resource manually through ClickOps
+
+If we run Terraform plan it will attempt to put our infastructure back into the expected state fixing configuration Drift
+
