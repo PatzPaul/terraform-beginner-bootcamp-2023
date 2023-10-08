@@ -1,5 +1,34 @@
 
-# Terraform Beginner Bootcamp: Week 0 :mage:
+# Terraform Beginner Bootcamp 2023: Week 0 :mage:
+
+- [Semantic Versioning 2.0.0](#semantic-versioning-200)
+- [Install the Terraform CLI](#install-the-terraform-cli)
+    * [Considerations with the Terraform CLI changes](#considerations-with-the-terraform-cli-changes)
+    * [Considerations for Linux Distribution](#considerations-for-linux-distribution)
+    * [Refactoring into Bash Scripts](#refactoring-into-bash-scripts)
+        + [Shebang Considerations](#shebang-considerations)
+        + [Execution Considerations](#execution-considerations)
+        + [Linux Permissions Considerations](#linux-permissions-considerations)
+- [Gitpod Lifecycle](#gitpod-lifecycle)
+    * [Working Env Vars](#working-env-vars)
+        + [Setting and Unsetting Env Vars](#setting-and-unsetting-env-vars)
+        + [Printing Vars](#printing-vars)
+        + [Scoping of Env Vars](#scoping-of-env-vars)
+        + [Persisting  Env Vars in Gitpod](#persisting--env-vars-in-gitpod)
+_ [AWS CLI Installation](#aws-cli-installation)
+- [Terraform Basics](#terraform-basics)
+    * [Terraform Registry](#terraform-registry)
+    * [Terraform Console](#terraform-console)
+        + [Terraform Init](#terraform-init)
+        + [Terraform Plan](#terraform-plan)
+        + [Terraform Apply](#terraform-apply)
+        + [Terraform Destroy](#terraform-destroy)
+        + [S3 Bucket Creation](#s3-bucket-creation)
+        + [Terraform Lock Files](#terraform-lock-files)
+        + [Terraform State Files](#terraform-state-files)
+        + [Terraform Directory](#terraform-directory)
+        + [Terraform Cloud login Issues and Gitpod workspaces](#terraform-cloud-login-issues-and-gitpod-workspaces)
+        + [Terraform Set up for Terraform Alias](#terraform-set-up-for-terraform-alias)
 
 
 ## Semantic Versioning 2.0.0 
@@ -55,7 +84,7 @@ This bash script is located here: ([./bin/install_terraform///-cli](./bin/instal
 - This will allow better portability for other projects that need to install Terraform CLI.
 
 
-### Shebang 
+#### Shebang Considerations
 A Shebang (pronounced Sha-bang) tells the bash script what program that will interpret the script.
 ChatGPT recommended this format for bash: `#!/usr/bin/env bash`
 
@@ -63,7 +92,7 @@ ChatGPT recommended this format for bash: `#!/usr/bin/env bash`
 - will search the user's PATH for the bash executable
 https://en.wikipedia.org/wiki/Shebang_(Unix)
 
-## Execution Considerations
+#### Execution Considerations
 when executing the bash script we can use the `./` shorthand notation to execute the bash script.
 eg. `./bin/install_terraform_cli`
 
@@ -83,8 +112,8 @@ chmod 744 ./bin/install_terraform_cli
 ```
 https://en.wikipedia.org/wiki/Chmod
 
-### Github Lifecylce(Before, Init, Command)
-we need to be careful when using the Init because it will not rerun if we restart an existing workspace.
+## Gitpod Lifecycle
+(Before, Init, Command) we need to be careful when using the Init because it will not rerun if we restart an existing workspace.
 
 https://www.gitpod.io/docs/configure/workspaces/tasks
 
@@ -95,17 +124,17 @@ We can list out all Environment Variables (Env Vars) Using the `env` command
 
 we can filter specific env vars using grep eg. `env | grep AWS_`
 
-### Setting and Unsetting Env Vars 
+#### Setting and Unsetting Env Vars 
 
-In the terminal we can set using `export HELLO='world'`
+In the terminal, we can set using `export HELLO='world'`
 
-In the terminal we unset using `unset HELLO`
+In the terminal, we unset using `unset HELLO`
 
 We can set an env var temporarily when just running a command
 ```sh
 HELLO='world' ./bin/print_message
 ``` 
-Within a bash script we can set env without writing export eg.
+Within a bash script, we can set env without writing export eg.
 
 ```sh
 
@@ -113,19 +142,19 @@ HELLO='world'
 echo $HElLO
 ```
 
-### Printing Vars
+#### Printing Vars
 
 We can print an env var using echo eg. `echo $HELLO`
 
-### Scoping of Env Vars 
+#### Scoping of Env Vars 
 
 When you open up new bash terminals in VSCode it will not be aware of env vars that you have set in another window 
 
-If you want to Env Vars to persist accross all future bash terminals that are open you need to set env vars in your `bash profile` 
+If you want to Env Vars to persist across all future bash terminals that are open you need to set env vars in your `bash_profile` 
 
-### Persisting  Env Vars in Gitpod
+#### Persisting  Env Vars in Gitpod
 
-We can persist env vars into gitpod by storing them in Gitpod secrets storage.
+We can persist env vars into Gitpod by storing them in Gitpod secrets storage.
 
 ```sh
 gp env HELLO='world'
@@ -136,7 +165,7 @@ All future workspaces launched will set the Env Vars for all bash terminals open
 You can also set env vars in the `.gitpod.yml` but this can only contain non-sensitive env vars.
 
 
-### AWS CLI Installation
+## AWS CLI Installation
 
 AWS CLI is installed for the project via the bash script [`./bin/install_aws_cli`](./bin/install_aws_cli)
 
@@ -149,7 +178,7 @@ We can check if our AWS credentials is configured correctly by running the follo
 ```
 aws sts get-caller-identity
 ```
-If succesful you should receive a json payload return that looks like this 
+If successful you should receive a json payload return that looks like this 
 
 ```json
 {
@@ -177,16 +206,16 @@ Terraform sources their providers and modules from the terraform registry which 
 
 We can see a list of all the Terraform commands by simply typing `terraform`
 
-### Terraform Init
+#### Terraform Init
 
 At the start of a new terraform project we will run `terraform init` to download the binaries for the terraform providers that we'll use in this project 
 
-### Terraform Plan
+#### Terraform Plan
 
 This will generate out a changeset, about the state of our infastructure and what will be changed.
 We can output this changeset ie. "plan" to be passed to an apply, but often you can just ignore outputting.
 
-### Terraform Apply 
+#### Terraform Apply 
 
 `terraform apply`
 
@@ -194,22 +223,22 @@ This will run a plan and pass the changeset to be execute by terraform.Apply sho
 
 If we want to automatically approve and apply we can provide the auto approve flag eg. `terraform apply --auto-approve`
 
-### Terraform Destroy 
+#### Terraform Destroy 
 `terraform destroy`
 This will destroy all resources such as recently generated storage buckets 
 
-### S3 Bucket Creation 
+#### S3 Bucket Creation 
 
 `S3 bucket`
 When we tried generating a random bucket name we ran into an issue that needed resolving and the implementation was put on using lowercase`true` and making sure to reference no uppercase `false` just in case
 
 
-### Terraform Lock Files 
+#### Terraform Lock Files 
 `.terraform.lock.hcl` contains the locked versioning for the providers or modules that should be used with this project.
 
 The Terraform Lock File should be committed to your Version Control System (VSC) eg. Github
 
-### Terraform State Files
+#### Terraform State Files
 
 `.terraform.tfstate` contain information about the current state of your infrastructure.
 
@@ -221,11 +250,11 @@ If you lose this file, you lose knowing the state of your infrastructure.
 
 `.terraform.tfstate.backup` is the previous state file state 
 
-### Terraform Directory
+#### Terraform Directory
 
 `.terraform` directory contains binaries of terraform providers.
 
-### Terraform Cloud login Issues and Gitpod workspaces 
+#### Terraform Cloud login Issues and Gitpod workspaces 
 
 When Attempting to run `terraform login` it will launch bash a wiswig view to generate a token however it is not functioning properly with Gitpod VsCode in the browser.
 
@@ -255,7 +284,7 @@ Provide the following code (replace your token in the file):
 
 We have automated this workaround with the following bash script [bin/generate_tfrc_credentials](bin/generate_tfrc_credentials)
 
-### Terraform Set up for Terraform Alias
+#### Terraform Set up for Terraform Alias
 
 When running the `terraform` command we want to use an alias `tf` by setting it in the .bash_profile
 
