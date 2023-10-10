@@ -1,5 +1,26 @@
 # Terraform Beginner Bootcamp 2023 - Week 1️⃣:
 
+## Fixing tags
+[How to delete local and remite tags on Git](https://devconnected.com/how-to-delete-local-and-remote-tags-on-git/)
+
+locally delete a tag
+```sh
+git tag -d <tag_name>
+```
+Remotely delete a tag
+```sh
+git push --delete origin tagname
+```
+
+Checkout the commit you want to retag, grab the sha from the Github history
+
+```sh
+git checkout <SHA>
+git tag M.M.P
+git push --tags
+git checkout main
+```
+
 ## Root Module Structure 
 
 Our root module structure is as follows:
@@ -33,13 +54,13 @@ We can set Terraform Cloud Variables to be sensitive so they are not shown visib
 ### var flags 
 We can use the `-var` flag to set an input variable or override a variabe in the tfvars file eg.
 
-```bash
+```sh
 terraform -var user_ud="my-user_id"
 ```
 ### var -file flags 
 The -var-file flag allows us to specify a file containing variable definitions. This is useful when you have a set of variables that you want to load from a file. Eg
 
-```bash
+```sh
 terraform plan -var-file="path/to/variables.tfvars"
 ```
 

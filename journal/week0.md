@@ -260,9 +260,8 @@ When Attempting to run `terraform login` it will launch bash a wiswig view to ge
 
 The workaround is manually generate a token in Terraform Cloud 
 
-```
+
 https://app.terraform.io/app/settings/tokens?source=terraform-login
-```
 
 Then create and open the file manually here:
 
@@ -289,7 +288,7 @@ We have automated this workaround with the following bash script [bin/generate_t
 When running the `terraform` command we want to use an alias `tf` by setting it in the .bash_profile
 
 Create a bash file `set_tf_alias` in the `./bin` directory to handle this when running workspace
-```bash
+```sh
 #!/usr/bin/env bash
 
 # Check if the alias already exists in the .bash_profile
@@ -309,7 +308,7 @@ fi
 source ~/ .bash_profile
 ```
 Proceed to make the file executable 
-```bash
+```sh
 chmod u+x ./bin/set_tf_alias
 ```
 then proceed to add the following in `gitpod.yml` file
