@@ -206,3 +206,11 @@ We use the json encode to create the json polict inline with the hcl.
 
 jsonencode 
 [jsonencode](https://developer.hashicorp.com/terraform/language/functions/jsonencode)
+
+## Changing the Lifecycle of Resources
+[Meta Arguments Lifecyle](https://developer.hashicorp.com/terraform/language/meta-arguments/lifecyle)
+
+## Terraform Data
+
+Plain data values such as local values and input variables don't have any side-effects to plan against and so they aren;t valid in replace_triggered_by. You can use terraform_data's behavior of planning an action each time input changes to indirectly use a plain value to trigger replacement.
+https://developer.hashicorp.com/terraform/language/resources/terraform-data
