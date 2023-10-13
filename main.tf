@@ -1,5 +1,5 @@
 terraform {
-  #backend "remote" {
+ #backend "remote" {
   #  hostname = "app.terraform.io"
   #  organization = "ExamPro"
 
@@ -7,14 +7,15 @@ terraform {
   #    name = "terra-house-1"
   #  }
   #}
-  #cloud {
-  #  organization = "ExamPro"
-  #  workspaces {
-  #    name = "terra-house-1"
-  #  }
-  #}
+  cloud {
+    organization = "Mastechs"
+    workspaces {
+      name = "terraform-cloud"
+    }
+  }
 
 }
+
 module "terrahouse_aws" {
   source = "./modules/terrahouse_aws"
   user_uuid = var.user_uuid
